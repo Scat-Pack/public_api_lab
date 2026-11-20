@@ -13,6 +13,13 @@ class Book(BaseModel):
     publish_date: str
     isbn: str
 
+book = Book(
+    title = 'The Great Gatsby',
+    author = 'F. Scott Fitzgerald',
+    publish_date = '1925',
+    isbn = '9780142437247'
+)
+
 # RegEx for ISBN-10 or ISBN-13 validation
 ISBN_REGEX = r"^(?:\d{10}|\d{13})$"
 
@@ -46,7 +53,7 @@ async def get_book_by_isbn(isbn: str):
         data = response.json()
 
         # Check if book data exists
-        book_key = f"ISBN: {isbn}"
+        book_key = f"ISBN:{isbn}"
         if book_key not in data:
             raise HTTPException(status_code=404, detail="Book not found")
 
